@@ -1,0 +1,25 @@
+# vsim -voptargs="+acc" -c tb_top -do "run -all; exit" 
+# Start time: 22:06:34 on Nov 09,2023
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: top.sv(11): Module 'controller' is not defined.
+# ** Error: datapath.sv(37): Module 'weight_buffer' is not defined.
+# ** Error: datapath.sv(46): Module 'input_buffer' is not defined.
+# ** Error: sys.sv(27): Module 'mac' is not defined.
+# ** Error: sys.sv(45): Module 'mac' is not defined.
+# ** Error: sys.sv(63): Module 'mac' is not defined.
+# ** Error: sys.sv(81): Module 'mac' is not defined.
+# ** Error: sys.sv(99): Module 'mac' is not defined.
+# ** Error: sys.sv(117): Module 'mac' is not defined.
+# ** Error: sys.sv(135): Module 'mac' is not defined.
+# ** Error: sys.sv(153): Module 'mac' is not defined.
+# ** Error: sys.sv(171): Module 'mac' is not defined.
+# ** Error: sys.sv(189): Module 'mac' is not defined.
+# ** Error: sys.sv(207): Module 'mac' is not defined.
+# ** Error: sys.sv(225): Module 'mac' is not defined.
+# ** Error: sys.sv(243): Module 'mac' is not defined.
+# ** Error: sys.sv(261): Module 'mac' is not defined.
+# ** Error: sys.sv(279): Module 'mac' is not defined.
+# Optimization failed
+# Error loading design
+# End time: 22:06:35 on Nov 09,2023, Elapsed time: 0:00:01
+# Errors: 18, Warnings: 0
