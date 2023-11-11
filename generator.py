@@ -1,5 +1,5 @@
-rows=5
-col=3
+rows=4
+col=2
 sys=open("generated.sv",'w')
 str=""
 for i in range(rows):
@@ -57,3 +57,4 @@ for i in range(rows):
   );\n"""
 sys.write(str)
 sys.close()
+#123

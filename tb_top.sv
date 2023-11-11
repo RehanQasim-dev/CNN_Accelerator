@@ -1,8 +1,8 @@
 `include "top.sv"
-
+import Config::*;
 module tb_top;
   logic clk, rst, start, ready;
-  logic [2:0][23:0] result;
+  logic [sys_cols-1:0][P_BITWIDTH-1:0] result;
   top dut (
       .clk(clk),
       .rst(rst),
@@ -10,7 +10,7 @@ module tb_top;
       .result(result),
       .ready(ready)
   );
-  logic [4:0][2:0][7:0] W_data;
+  logic [sys_rows-2:0][sys_cols-1:0][W_BITWIDTH-1:0] W_data;
   assign W_data = dut.datapath_instance.sys_instance.W_data;
   //clock generation
   localparam CLK_PERIOD = 10;
@@ -31,6 +31,7 @@ module tb_top;
     rst   = 0;
     start = 1;
     @(posedge clk);
+    start = 0;
     repeat (30) @(posedge clk);
     $finish;
   end
