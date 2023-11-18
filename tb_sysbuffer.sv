@@ -5,9 +5,7 @@ module tb_sysbuffer;
   logic [2:0] o_valid;
 
   logic [2:0][7:0] o_data;
- input_buffer  #(
-      .BITWIDTH(8)
-  ) DUT (
+  input_buffer DUT (
       .rst(rst),
       .clk(clk),
       .read(start),
