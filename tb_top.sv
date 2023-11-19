@@ -31,8 +31,7 @@ module tb_top;
     rst   = 0;
     start = 1;
     @(posedge clk);
-    start = 0;
-    repeat (30) @(posedge clk);
+    repeat (50) @(posedge clk);
     $finish;
   end
   int i;

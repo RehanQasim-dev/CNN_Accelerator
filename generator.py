@@ -27,16 +27,23 @@ for i in range(rows):
             P_out=f"P_data[{i}][{j}]"
 
         if (j==0):
+            switch_in=f"W_switch[{i}][{j}]"
+            switch_out=f"W_switch[{i}][{j+1}]"
             A_en=f"if_en[{i}]"
             A_ready=f"A_ready[{i}][{j}]"
             A_in=f"if_data[{i}]"
             A_out=f"A_data[{i}][{j}]"
+
         elif (j==col-1):
+            switch_in=f"W_switch[{i}][{j}]"
+            switch_out=f""
             A_en=f"A_ready[{i}][{j-1}]"
             A_ready=f""
             A_in=f"A_data[{i}][{j-1}]"
             A_out=f""
         else:
+            switch_in=f"W_switch[{i}][{j}]"
+            switch_out=f"W_switch[{i}][{j+1}]"
             A_en=f"A_ready[{i}][{j-1}]"
             A_ready=f"A_ready[{i}][{j}]"
             A_in=f"A_data[{i}][{j-1}]"
@@ -44,6 +51,8 @@ for i in range(rows):
         str+=f"""mac mac_instance{i}{j} (
       .clk(clk),
       .rst(rst),
+      .switch_in({switch_in}),
+      .switch_out({switch_out}),
       .A_en({A_en}),
       .A_ready({A_ready}),
       .A_in({A_in}),
@@ -57,4 +66,3 @@ for i in range(rows):
   );\n"""
 sys.write(str)
 sys.close()
-#123

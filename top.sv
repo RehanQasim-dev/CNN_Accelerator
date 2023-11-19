@@ -7,7 +7,7 @@ module top (
     output logic ready
 );
   logic w_read, if_read, w_done, if_done;
-  logic clr;
+  logic clr_w, clr_if, switch;
   controller controller_instance (
       .clk(clk),
       .rst(rst),
@@ -16,19 +16,25 @@ module top (
       .if_done(if_done),
       .w_read(w_read),
       .if_read(if_read),
-      .clr(clr),
+      .clr_w(clr_w),
+      .clr_if(clr_if),
+      .switch(switch),
       .ready(ready)
   );
+
 
   datapath datapath_instance (
       .clk(clk),
       .rst(rst),
       .w_buffer_read(w_read),
       .if_buffer_read(if_read),
-      .clr(clr),
+      .clr_w(clr_w),
+      .clr_if(clr_if),
+      .switch(switch),
       .of_data(result),
       .w_done(w_done),
       .if_done(if_done)
   );
+
 
 endmodule : top

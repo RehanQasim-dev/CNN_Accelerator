@@ -4,7 +4,9 @@ module datapath (
     rst,
     w_buffer_read,
     if_buffer_read,
-    clr,
+    clr_w,
+    clr_if,
+    switch,
     output logic [sys_cols-1:0][P_BITWIDTH-1:0] of_data,
     output logic w_done,
     if_done
@@ -14,12 +16,17 @@ module datapath (
   logic [sys_rows-1:0][A_BITWIDTH-1:0] if_data;
   logic [sys_cols-1:0][W_BITWIDTH-1:0] i_wdata;
   logic [sys_cols-1:0] wfetch;
-  logic [counter_width-1:0] count;
-  assign w_done  = count == sys_rows - 1;
-  assign if_done = count == A_rows - 1;
+  logic [$clog2(sys_rows)-1:0] count_w;
+  logic [$clog2(A_rows)-1:0] count_if;
+  assign w_done  = count_w == sys_rows - 1;
+  assign if_done = count_if == A_rows - 1;
   always_ff @(posedge clk) begin
-    if (clr) count <= 0;
-    else count <= count + 1;
+    if (clr_w) count_w <= 0;
+    else count_w <= count_w + 1;
+  end
+  always_ff @(posedge clk) begin
+    if (clr_if) count_if <= 0;
+    else count_if <= count_if + 1;
   end
   weight_buffer weight_buffer_instance (
       .rst(rst),
@@ -36,9 +43,10 @@ module datapath (
       .o_data(if_data)
   );
 
-  sys sys_instance (
+  systolic sys_instance (
       .clk(clk),
       .rst(rst),
+      .switch(switch),
       .if_en(if_en),
       .wfetch(wfetch),
       .if_data(if_data),

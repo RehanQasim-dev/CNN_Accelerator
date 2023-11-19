@@ -10,7 +10,7 @@ module input_buffer (
   int j;
   assign o_valid[0] = read;
   always @(posedge (clk)) begin
-    if (rst) o_valid = 3'b0;
+    if (rst) o_valid = 0;
     else begin
       for (j = 0; j < sys_rows - 1; j = j + 1) begin
         o_valid[j+1] <= o_valid[j];
