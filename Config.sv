@@ -1,4 +1,5 @@
 package Config;
+  parameter BIAS = 24'b000;
   parameter A_BITWIDTH = 8;
   parameter W_BITWIDTH = 8;
   parameter P_BITWIDTH = 24;

@@ -43,7 +43,7 @@ module datapath (
       .wfetch(wfetch),
       .if_data(if_data),
       .i_wdata(i_wdata),
-      .bias(3'b000),
+      .bias(BIAS),
       .of_data(of_data)
   );
 endmodule
