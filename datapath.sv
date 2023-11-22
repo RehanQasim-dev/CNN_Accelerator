@@ -1,3 +1,6 @@
+`include "systolic.sv"
+`include "input_buffer.sv"
+`include "weight_buffer.sv"
 import Config::*;
 module datapath (
     input logic clk,
@@ -51,7 +54,7 @@ module datapath (
       .wfetch(wfetch),
       .if_data(if_data),
       .i_wdata(i_wdata),
-      .bias(BIAS),
+      .bias(3'b000),
       .of_data(of_data)
   );
 endmodule

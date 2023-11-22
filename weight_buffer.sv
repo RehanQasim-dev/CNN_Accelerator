@@ -1,3 +1,4 @@
+`include "buffer.sv"
 import Config::*;
 module weight_buffer (
     input logic rst,

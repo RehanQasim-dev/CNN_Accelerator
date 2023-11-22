@@ -1,3 +1,5 @@
+`include "w_controller.sv"
+`include "if_controller.sv"
 module controller (
     input clk,
     input rst,

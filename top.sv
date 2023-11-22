@@ -1,3 +1,6 @@
+`include "datapath.sv"
+`include "controller.sv"
+
 import Config::*;
 module top (
     input clk,

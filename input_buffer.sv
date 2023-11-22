@@ -1,3 +1,5 @@
+`include "buffer.sv"
+
 import Config::*;
 module input_buffer (
     input logic rst,

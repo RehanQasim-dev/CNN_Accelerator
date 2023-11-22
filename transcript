@@ -11,16 +11,22 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim -debugdb=+acc weight_manager 
-# Start time: 09:59:19 on Nov 19,2023
+# vsim -debugdb=+acc datapath 
+# Start time: 16:46:49 on Nov 22,2023
 # ** Warning: (vsim-4308) Enabling visibility using +acc is recommended with debug flow.
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vsim-8611) Generating debug db.
-# ** Warning: (vopt-4308) Enabling visibility using +acc is recommended with debug flow.
-# ** Error: (vopt-13130) Failed to find design unit weight_manager.
-#         Searched libraries:
-#             work
-# Optimization failed
+** Warning: (vopt-4308) Enabling visibility using +acc is recommended with debug#  flow.
+# ** Error (suppressible): (vopt-12003) systolic.sv(33): Variable 'W_switch' written by continuous and procedural assignments. See systolic.sv(30). 
+# ** Note: (vopt-4301) Memory core inferred for signal 'fifo' width=8, depth=50, type=RAM at location buffer.sv:22
+# ** Note: (vopt-4301) Memory core inferred for signal 'fifo' width=8, depth=50, type=RAM at location buffer.sv:22
+# ** Note: (vopt-4301) Memory core inferred for signal 'fifo' width=8, depth=50, type=RAM at location buffer.sv:22
+# ** Note: (vopt-4301) Memory core inferred for signal 'fifo' width=8, depth=50, type=RAM at location buffer.sv:22
+# ** Error (suppressible): (vopt-12003) weight_buffer.sv(15): Variable 'o_valid' written by continuous and procedural assignments. See weight_buffer.sv(12). 
+# ** Error (suppressible): (vopt-12003) weight_buffer.sv(18): Variable 'o_valid' written by continuous and procedural assignments. See weight_buffer.sv(12). 
+# ** Error (suppressible): (vopt-12003) input_buffer.sv(14): Variable 'o_valid' written by continuous and procedural assignments. See input_buffer.sv(12). 
+# ** Error (suppressible): (vopt-12003) input_buffer.sv(17): Variable 'o_valid' written by continuous and procedural assignments. See input_buffer.sv(12). 
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
 # Error loading design
-# End time: 09:59:21 on Nov 19,2023, Elapsed time: 0:00:02
-# Errors: 1, Warnings: 2
+# End time: 16:46:52 on Nov 22,2023, Elapsed time: 0:00:03
+# Errors: 6, Warnings: 2

@@ -1,5 +1,5 @@
 import Config::*;
-
+`include "mac.sv"
 module systolic (
     input logic clk,
     rst,
