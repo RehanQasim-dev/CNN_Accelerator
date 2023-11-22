@@ -19,7 +19,7 @@ module w_controller (
   localparam FETCH = 2'b01;
   localparam WAIT = 2'b10;
   logic [1:0] ns, cs;
-  always_comb begin
+  always_ff @(posedge clk) begin
     if (cs == READY) begin
       if (start) begin
         start_if = 0;
@@ -27,7 +27,6 @@ module w_controller (
         switch = 0;
         ready = 0;
         clr_w = 1'b1;
-        ns = FETCH;
         $display("start=1");
       end else begin
         start_if = 0;
@@ -35,46 +34,40 @@ module w_controller (
         switch = 0;
         ready = 1;
         clr_w = 1'bx;
-        ns = READY;
       end
     end else if (cs == FETCH) begin
-      if (~w_done) begin
+      if (!w_done) begin
         start_if = 0;
         w_read = 1;
         switch = 0;
         ready = 0;
         clr_w = 1'b0;
-        ns = FETCH;
       end else if (w_done & if_ready) begin
         start_if = 1;
         w_read = 0;
         switch = 1;
         ready = 1;
         clr_w = 1'bx;
-        ns = READY;
       end else begin
         start_if = 0;
         w_read = 0;
         switch = 0;
         ready = 0;
         clr_w = 1'bx;
-        ns = WAIT;
       end
     end else if (cs == WAIT) begin
-      if (~if_ready) begin
+      if (!if_ready) begin
         start_if = 0;
         w_read = 0;
         switch = 0;
         ready = 0;
         clr_w = 1'bx;
-        ns = WAIT;
       end else begin
         start_if = 1;
         w_read = 0;
         switch = 1;
         ready = 1;
         clr_w = 1'bx;
-        ns = READY;
       end
     end else begin
       start_if = 'x;
@@ -82,9 +75,37 @@ module w_controller (
       switch = 'x;
       ready = 'x;
       clr_w = 'x;
-      ns = READY;
     end
 
+  end
+
+
+
+  always_comb begin
+    if (cs == READY) begin
+      if (start) begin
+        ns = FETCH;
+        $display("start=1");
+      end else begin
+        ns = READY;
+      end
+    end else if (cs == FETCH) begin
+      if (!w_done) begin
+        ns = FETCH;
+      end else if (w_done & if_ready) begin
+        ns = READY;
+      end else begin
+        ns = WAIT;
+      end
+    end else if (cs == WAIT) begin
+      if (!if_ready) begin
+        ns = WAIT;
+      end else begin
+        ns = READY;
+      end
+    end else begin
+      ns = READY;
+    end
   end
   //switch and if_start are same
   always_ff @(posedge clk) begin

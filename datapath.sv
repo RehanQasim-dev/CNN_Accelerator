@@ -14,7 +14,6 @@ module datapath (
     output logic w_done,
     if_done
 );
-
   logic [sys_rows-1:0] if_en;
   logic [sys_rows-1:0][A_BITWIDTH-1:0] if_data;
   logic [sys_cols-1:0][W_BITWIDTH-1:0] i_wdata;

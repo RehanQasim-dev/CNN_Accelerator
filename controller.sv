@@ -20,7 +20,7 @@ module controller (
       .start(start),
       .if_ready(if_ready),
       .w_done(w_done),
-      .start_late_if(start_if),
+      .start_if(start_if),
       .w_read(w_read),
       .switch(switch),
       .clr_w(clr_w),
