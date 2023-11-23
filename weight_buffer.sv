@@ -9,11 +9,12 @@ module weight_buffer (
 );
   // localparam string filenames[3] = {"file1.txt", "file2.txt", "file3.txt"};
   //parametrize it
-  assign o_valid[0] = read;
+
   int j;
   always @(posedge (clk)) begin
-    if (rst) o_valid = 0;
+    if (rst) o_valid <= 0;
     else begin
+      o_valid[0] <= read;
       for (j = 0; j < sys_cols - 1; j = j + 1) begin
         o_valid[j+1] <= o_valid[j];
       end

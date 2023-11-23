@@ -13,28 +13,28 @@ module if_controller (
   always_ff @(posedge clk) begin
     if (cs == READY) begin
       if (start_if) begin
-        if_read  = 1;
-        if_ready = 0;
-        clr_if   = 1'b1;
+        if_read  <= 1;
+        if_ready <= 0;
+        clr_if   <= 1'b1;
       end else begin
-        if_read  = 0;
-        if_ready = 1;
-        clr_if   = 1'bx;
+        if_read  <= 0;
+        if_ready <= 1;
+        clr_if   <= 1'bx;
       end
     end else if (cs == BUSY) begin
       if (!if_done) begin
-        if_read  = 1;
-        if_ready = 0;
-        clr_if   = 1'b0;
+        if_read  <= 1;
+        if_ready <= 0;
+        clr_if   <= 1'b0;
       end else begin
-        if_read  = 0;
-        if_ready = 1;
-        clr_if   = 1'bx;
+        if_read  <= 0;
+        if_ready <= 1;
+        clr_if   <= 1'bx;
       end
     end else begin
-      if_read  = 'x;
-      if_ready = 'x;
-      clr_if   = 'x;
+      if_read  <= '0;
+      if_ready <= '0;
+      clr_if   <= '0;
     end
   end
 

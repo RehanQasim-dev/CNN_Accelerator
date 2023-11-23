@@ -22,59 +22,59 @@ module w_controller (
   always_ff @(posedge clk) begin
     if (cs == READY) begin
       if (start) begin
-        start_if = 0;
-        w_read = 1;
-        switch = 0;
-        ready = 0;
-        clr_w = 1'b1;
+        start_if <= 0;
+        w_read <= 1;
+        switch <= 0;
+        ready <= 0;
+        clr_w <= 1'b1;
         $display("start=1");
       end else begin
-        start_if = 0;
-        w_read = 0;
-        switch = 0;
-        ready = 1;
-        clr_w = 1'bx;
+        start_if <= 0;
+        w_read <= 0;
+        switch <= 0;
+        ready <= 1;
+        clr_w <= 1'bx;
       end
     end else if (cs == FETCH) begin
       if (!w_done) begin
-        start_if = 0;
-        w_read = 1;
-        switch = 0;
-        ready = 0;
-        clr_w = 1'b0;
+        start_if <= 0;
+        w_read <= 1;
+        switch <= 0;
+        ready <= 0;
+        clr_w <= 1'b0;
       end else if (w_done & if_ready) begin
-        start_if = 1;
-        w_read = 0;
-        switch = 1;
-        ready = 1;
-        clr_w = 1'bx;
+        start_if <= 1;
+        w_read <= 0;
+        switch <= 1;
+        ready <= 1;
+        clr_w <= 1'bx;
       end else begin
-        start_if = 0;
-        w_read = 0;
-        switch = 0;
-        ready = 0;
-        clr_w = 1'bx;
+        start_if <= 0;
+        w_read <= 0;
+        switch <= 0;
+        ready <= 0;
+        clr_w <= 1'bx;
       end
     end else if (cs == WAIT) begin
       if (!if_ready) begin
-        start_if = 0;
-        w_read = 0;
-        switch = 0;
-        ready = 0;
-        clr_w = 1'bx;
+        start_if <= 0;
+        w_read <= 0;
+        switch <= 0;
+        ready <= 0;
+        clr_w <= 1'bx;
       end else begin
-        start_if = 1;
-        w_read = 0;
-        switch = 1;
-        ready = 1;
-        clr_w = 1'bx;
+        start_if <= 1;
+        w_read <= 0;
+        switch <= 1;
+        ready <= 1;
+        clr_w <= 1'bx;
       end
     end else begin
-      start_if = 'x;
-      w_read = 'x;
-      switch = 'x;
-      ready = 'x;
-      clr_w = 'x;
+      start_if <= '0;
+      w_read <= '0;
+      switch <= '0;
+      ready <= '0;
+      clr_w <= '0;
     end
 
   end

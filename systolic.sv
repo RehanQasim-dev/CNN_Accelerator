@@ -26,9 +26,10 @@ module systolic (
   //       W_switch[i+1][0] <= W_switch[i][0];
   //     end
   //   end
-  assign W_switch[0][0] = switch;
+  //   assign W_switch[0][0] = switch;
   always_ff @(posedge clk) begin
-    for (int i = 0; i < sys_rows - 1; i = i + 1) begin
+    W_switch[1][0] <= switch;
+    for (int i = 1; i < sys_rows - 1; i = i + 1) begin
       W_switch[i+1][0] <= W_switch[i][0];
     end
   end
@@ -36,7 +37,7 @@ module systolic (
   mac mac_instance00 (
       .clk(clk),
       .rst(rst),
-      .switch_in(W_switch[0][0]),
+      .switch_in(switch),
       .switch_out(W_switch[0][1]),
       .A_en(if_en[0]),
       .A_ready(A_ready[0][0]),
