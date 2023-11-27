@@ -20,7 +20,7 @@ module datapath (
   logic [sys_cols-1:0] wfetch;
   logic [$clog2(sys_rows)-1:0] count_w;
   logic [$clog2(A_rows)-1:0] count_if;
-  assign w_done  = count_w == sys_rows - 1;
+  assign w_done  = count_w == sys_rows - 3;
   assign if_done = count_if == A_rows - 1;
   always_ff @(posedge clk) begin
     if (clr_w) count_w <= 0;

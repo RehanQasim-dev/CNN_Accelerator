@@ -13,6 +13,10 @@ module controller (
     switch,
     ready
 );
+  logic switch_old;
+  always_ff @(posedge clk) begin : blockName
+    switch <= switch_old;
+  end
   logic start_if, if_ready;
   w_controller w_controller_instance (
       .clk(clk),
@@ -22,7 +26,8 @@ module controller (
       .w_done(w_done),
       .start_if(start_if),
       .w_read(w_read),
-      .switch(switch),
+      .switch(switch_old),
+      //   .switch(switch),
       .clr_w(clr_w),
       .ready(ready)
   );
