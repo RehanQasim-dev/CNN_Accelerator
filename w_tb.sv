@@ -36,6 +36,8 @@ module w_tb;
     @(posedge clk);
     rst   = 0;
     start = 1;
+    @(posedge clk);
+    start = 0;
     repeat (6) @(posedge clk);
     w_done = 1;
     repeat (6) @(posedge clk);

@@ -24,13 +24,13 @@ module tb_top;
   //Testbench
 
   initial begin
-    rst   = 1;
-    start = 0;
+    rst   <= 1;
+    start <= 0;
     @(posedge clk);
+    rst   <= 0;
+    start <= 1;
     @(posedge clk);
-    rst   = 0;
-    start = 1;
-    @(posedge clk);
+    start <= 0;
     repeat (50) @(posedge clk);
     $finish;
   end
