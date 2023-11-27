@@ -42,12 +42,13 @@ module buffer #(
       rptr <= 0;
     end else begin
       if (rd_en & !empty) begin
-        dout <= fifo[rptr];
+
         rptr <= rptr + 1;
       end
       // else if (empty) dout <= 0;
     end
   end
+  assign dout  = fifo[rptr];
   assign full  = (wptr + 1) == rptr;
   assign empty = wptr == rptr;
 endmodule
