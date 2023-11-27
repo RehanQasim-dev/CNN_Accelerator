@@ -10,11 +10,10 @@ module input_buffer (
 );
   // localparam string filenames[3] = {"file1.txt", "file2.txt", "file3.txt"};
   int j;
-
+  assign o_valid[0] = read;
   always @(posedge (clk)) begin
     if (rst) o_valid <= 0;
     else begin
-      o_valid[0] <= read;
       for (j = 0; j < sys_rows - 1; j = j + 1) begin
         o_valid[j+1] <= o_valid[j];
       end
@@ -50,7 +49,7 @@ module input_buffer (
           .wr_clk(clk),
           .rd_clk(clk),
           .wr_en(),
-          .rd_en(o_valid[i-1]),
+          .rd_en(o_valid[i]),
           .din(),
           .dout(o_data[i]),
           .empty(),

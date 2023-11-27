@@ -42,7 +42,6 @@ module buffer #(
       rptr <= 0;
     end else begin
       if (rd_en & !empty) begin
-
         rptr <= rptr + 1;
       end
       // else if (empty) dout <= 0;
