@@ -1,4 +1,4 @@
-rows=4
+rows=2
 col=2
 sys=open("generated.sv",'w')
 str=""

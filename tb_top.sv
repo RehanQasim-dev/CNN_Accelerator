@@ -30,7 +30,7 @@ module tb_top;
     rst   <= 0;
     start <= 1;
     @(posedge clk);
-    start <= 0;
+    // start <= 0;
     repeat (50) @(posedge clk);
     $finish;
   end

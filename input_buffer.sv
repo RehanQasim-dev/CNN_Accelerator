@@ -24,7 +24,7 @@ module input_buffer (
       .filename("B1.txt"),
       .DEPTH(input_buffer_depth),
       .DWIDTH(A_BITWIDTH),
-      .DUMP_LEN(A_rows)
+      .DUMP_LEN(super_A_rows)
   ) buffer_instance (
       .rstn(rst),
       .wr_clk(clk),

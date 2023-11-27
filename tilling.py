@@ -4,10 +4,10 @@ import numpy as np
 A = np.array([[9, 8, 7, 6],
                        [5, 4, 3, 2],
                        [1, 9, 8, 7]])
-B = np.array([[1, 2, 3],
-                       [4, 5, 6],
-                       [7, 8, 9],
-                       [1, 2, 3]])
+B = np.array([[1, 2, 3,2],
+                       [4, 5, 6,3],
+                       [7, 8, 9,6],
+                       [1, 2, 3,1]])
 
 # Creating a 3x4 array of integers
 
@@ -33,7 +33,7 @@ for i in range(0,A_cols,sys_cols):#iterate over B
             C=np.dot(tile_A,tile_B)
         else:
             C+=np.dot(tile_A,tile_B)
-        # print(tile_A)
-    print (C)
+        print(np.dot(tile_A,tile_B))
+    # print (C)
     C=None
 print (np.dot(A,B))

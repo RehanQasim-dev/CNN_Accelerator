@@ -25,7 +25,7 @@ module weight_buffer (
       .filename("w1.txt"),
       .DEPTH(w_buffer_depth),
       .DWIDTH(W_BITWIDTH),
-      .DUMP_LEN(W_rows)
+      .DUMP_LEN(super_w_rows)
   ) buffer_instance (
       .rstn(rst),
       .wr_clk(clk),
