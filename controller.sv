@@ -17,7 +17,8 @@ module controller (
   localparam int FETCH = 1;
   localparam int FetchAndConv = 2;
   localparam int CONV = 3;
-  logic [1:0] cs, ns;
+  localparam int W_WAIT = 4;
+  logic [2:0] cs, ns;
   always_comb begin
     ready   = 0;
     clr_w   = 0;
@@ -52,7 +53,7 @@ module controller (
         ns = CONV;
       end
       FetchAndConv:
-      if (if_done & w_done) begin
+      if (start & if_done & w_done) begin
         switch = 1;
         // w_read = 1;
         // if_read = 1;
@@ -63,20 +64,42 @@ module controller (
         w_read = 1;
         if_read = 1;
         ns = FetchAndConv;
+      end else if (if_done & ~w_done) begin
+        w_read = 1;
+        ns = FETCH;
       end else begin
         if_read = 1;
-        ns = CONV;
+        ns = W_WAIT;
       end
       CONV:
-      if (~if_done) begin
+      if (~start & ~if_done) begin
         if_read = 1;
+
       end else if (if_done & start) begin
         clr_w = 1;
         // w_read = 1;
         ns = FETCH;
+      end else if (~if_done & start) begin
+        clr_w = 1;
+        // w_read = 1;
+        ns = FetchAndConv;
       end else begin
         ready = 1;
         ns = IDLE;
+      end
+      W_WAIT:
+      if (~if_done) begin
+        if_read = 1;
+      end else if (start & if_done) begin
+        switch = 1;
+        clr_if = 1;
+        clr_w = 1;
+        ns = FetchAndConv;
+      end else begin
+        clr_w = 1;
+        clr_if = 1;
+        clr_w = 1;
+        ns = CONV;
       end
     endcase
   end
