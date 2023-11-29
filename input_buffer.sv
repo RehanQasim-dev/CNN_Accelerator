@@ -43,7 +43,7 @@ module input_buffer (
           .filename($sformatf("B%0d.txt", i + 1)),
           .DEPTH(input_buffer_depth),
           .DWIDTH(A_BITWIDTH),
-          .DUMP_LEN(W_rows)
+          .DUMP_LEN(super_A_rows)
       ) buffer_instance (
           .rstn(rst),
           .wr_clk(clk),
