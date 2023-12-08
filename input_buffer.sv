@@ -21,7 +21,7 @@ module input_buffer (
   end
 
   buffer #(
-      .filename("B1.txt"),
+      .filename("activations_1.txt"),
       .DEPTH(input_buffer_depth),
       .DWIDTH(A_BITWIDTH),
       .DUMP_LEN(super_A_rows)
@@ -40,7 +40,7 @@ module input_buffer (
   generate
     for (i = 1; i < sys_rows; i = i + 1) begin : FIFO
       buffer #(
-          .filename($sformatf("B%0d.txt", i + 1)),
+          .filename($sformatf("activations_%0d.txt", i + 1)),
           .DEPTH(input_buffer_depth),
           .DWIDTH(A_BITWIDTH),
           .DUMP_LEN(super_A_rows)

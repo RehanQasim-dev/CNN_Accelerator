@@ -29,11 +29,13 @@ for i in range(0,A_cols,sys_cols):#iterate over B
     for j in range(0,B_rows,sys_rows):#interate over A and B
         tile_A=A[:,j:min(j+sys_rows,A_cols)]
         tile_B=B[j:min(j+sys_rows,B_rows),i:min(i+sys_cols,B_cols)]
+        print("A_tile= ",tile_A)
+        print("B_tile= ",tile_B)
         if(C is None):
             C=np.dot(tile_A,tile_B)
         else:
             C+=np.dot(tile_A,tile_B)
-        print(np.dot(tile_A,tile_B))
+        print("C=",np.dot(tile_A,tile_B))
     # print (C)
     C=None
-print (np.dot(A,B))
+# print (np.dot(A,B))
