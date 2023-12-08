@@ -1,9 +1,10 @@
-rows=2
-col=2
+rows=4
+col=4
 sys=open("generated.sv",'w')
 str=""
 for i in range(rows):
     for j in range(col):
+        #for control signals flowing downward
         if (i==0):
             W_en=f"wfetch[{j}]"
             W_ready=f"W_ready[{i}][{j}]"
@@ -25,7 +26,7 @@ for i in range(rows):
             W_out=f"W_data[{i}][{j}]"
             P_in=f"P_data[{i-1}][{j}]"
             P_out=f"P_data[{i}][{j}]"
-
+        #for control signals flowing rightward
         if (j==0):
             switch_in=f"W_switch[{i}][{j}]"
             switch_out=f"W_switch[{i}][{j+1}]"
@@ -48,6 +49,9 @@ for i in range(rows):
             A_ready=f"A_ready[{i}][{j}]"
             A_in=f"A_data[{i}][{j-1}]"
             A_out=f"A_data[{i}][{j}]"
+        
+        if (i==0 and j==0):
+            switch_in=f"switch"
         str+=f"""mac mac_instance{i}{j} (
       .clk(clk),
       .rst(rst),
@@ -66,3 +70,4 @@ for i in range(rows):
   );\n"""
 sys.write(str)
 sys.close()
+
