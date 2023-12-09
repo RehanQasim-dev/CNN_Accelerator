@@ -6,12 +6,16 @@ module controller (
     input start,
     w_done,
     if_done,
+    rd_nxt_inst,
     output logic w_read,
+
     if_read,
     clr_w,
     clr_if,
     switch,
-    ready
+    ready,
+    first,
+    last
 );
   localparam int IDLE = 0;
   localparam int FETCH = 1;
@@ -107,4 +111,13 @@ module controller (
     if (rst) cs <= 0;
     else cs <= ns;
   end
+  instr_dec instr_dec_instance (
+      .clk(clk),
+      .rst(rst),
+      .wr_en(),
+      .rd_nxt_inst(rd_nxt_inst),
+      .instr(),
+      .start(first),
+      .last(last)
+  );
 endmodule : controller

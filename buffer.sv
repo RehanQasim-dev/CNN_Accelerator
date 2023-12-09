@@ -23,6 +23,7 @@ module buffer #(
 
   initial begin
     // $readmemh(filename, fifo);
+    fifo = '{default: '0};
     $readmemh(filename, fifo);
     wptr <= DUMP_LEN;
     rptr <= 0;

@@ -10,9 +10,12 @@ module datapath (
     clr_w,
     clr_if,
     switch,
+    first,
+    last,
     output logic [sys_cols-1:0][P_BITWIDTH-1:0] of_data,
     output logic w_done,
-    if_done
+    if_done,
+    rd_nxt_inst
 );
   logic [sys_rows-1:0] if_en;
   logic [sys_rows-1:0][A_BITWIDTH-1:0] if_data;
@@ -56,4 +59,19 @@ module datapath (
       .bias(BIAS),
       .of_data(of_data)
   );
+
+  logic [sys_cols-1:0] read_out;
+  logic [sys_cols-1:0][W_BITWIDTH-1:0] o_data;
+  accumulator accumulator_instance (
+      .rst(rst),
+      .clk(clk),
+      .start(first),
+      .last(last),
+      .enable(if_en[sys_rows-1]),
+      .i_data(of_data),
+      .read_out(read_out),
+      .o_data(o_data),
+      .done(rd_nxt_inst)
+  );
+
 endmodule
