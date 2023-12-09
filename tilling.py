@@ -2,33 +2,25 @@ import numpy as np
 
 # Creating a 4x3 array of integers
 A = np.array([[9, 8, 7, 6],
-                       [5, 4, 3, 2],
-                       [1, 9, 8, 7]])
-B = np.array([[1, 2, 3,2],
-                       [4, 5, 6,3],
-                       [7, 8, 9,6],
-                       [1, 2, 3,1]])
+              [5, 4, 3, 2],
+              [1, 9, 8, 7]])
+B = np.array([[1, 2, 3, 2],
+              [4, 5, 6, 3],
+              [7, 8, 9, 6],
+              [1, 2, 3, 1]])
 
-# Creating a 3x4 array of integers
+# Define system dimensions
+sys_rows = 2
+sys_cols = 2
 
-A_rows=len(A)
-A_cols=len(A[0])
-B_rows=len(B)
-B_cols=len(B[0])
-
-# print("4x3 Array:")
-# print(array_4x3)
-
-# print("\n3x4 Array:")
-# print(array_3x4)
-print(A_cols)
-sys_rows=2
-sys_cols=2
+# Get dimensions of matrices A and B
+A_rows, A_cols = A.shape
+B_rows, B_cols = B.shape
 C=None
-for i in range(0,A_cols,sys_cols):#iterate over B
-    for j in range(0,B_rows,sys_rows):#interate over A and B
-        tile_A=A[:,j:min(j+sys_rows,A_cols)]
-        tile_B=B[j:min(j+sys_rows,B_rows),i:min(i+sys_cols,B_cols)]
+for i in range(0, A_cols, sys_cols):  # Iterate over B columns
+    for j in range(0, B_rows, sys_rows):  # Iterate over A and B rows
+        tile_A = A[:, j:min(j + sys_rows, A_cols)]
+        tile_B = B[j:min(j + sys_rows, B_rows), i:min(i + sys_cols, B_cols)]
         print("A_tile= ",tile_A)
         print("B_tile= ",tile_B)
         if(C is None):
@@ -36,6 +28,14 @@ for i in range(0,A_cols,sys_cols):#iterate over B
         else:
             C+=np.dot(tile_A,tile_B)
         print("C=",np.dot(tile_A,tile_B))
-    # print (C)
-    C=None
-# print (np.dot(A,B))
+        # Write columns of tile_A to separate files
+        for col in range(tile_A.shape[1]):
+            with open(f"activations_{col+1}.txt", 'w' if i==0 and j == 0 else 'a') as file_A:
+                np.savetxt(file_A, tile_A[:, col], fmt='%d', newline="\n")
+        
+        # Invert the columns of tile_B and write to separate files
+        for col in range(tile_B.shape[1]):
+            inverted_col = np.flip(tile_B[:, col])  # Invert column using np.flip
+            with open(f"w{col+1}.txt", 'w' if i==0 and j == 0 else 'a') as file_B:
+                np.savetxt(file_B, inverted_col, fmt='%d', newline="\n")
+print("answer=",np.dot(A,B))
