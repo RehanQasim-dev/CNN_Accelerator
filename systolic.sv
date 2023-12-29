@@ -38,7 +38,7 @@ module systolic (
   for (i = 0; i < sys_rows; i++) begin
     for (j = 0; j < sys_cols; j++) begin
       //for control signals flowing downward
-      if (i == 0 && j == 0) begin
+      if (i == 0 && j == 0)
         mac mac_instance (
             .clk(clk),
             .rst(rst),
@@ -55,7 +55,7 @@ module systolic (
             .P_in(bias),
             .P_out(P_data[i][j])
         );
-      end else if (i == 0 && j == sys_cols - 1)
+      else if (i == 0 && j == sys_cols - 1)
         mac mac_instance (
             .clk(clk),
             .rst(rst),
@@ -132,11 +132,11 @@ module systolic (
             .clk(clk),
             .rst(rst),
             .switch_in(W_switch[i][j]),
-            .switch_out(),
+            .switch_out(W_switch[i][j+1]),
             .A_en(A_ready[i][j-1]),
-            .A_ready(),
+            .A_ready(A_ready[i][j]),
             .A_in(A_data[i][j-1]),
-            .A_out(),
+            .A_out(A_data[i][j]),
             .W_en(W_ready[i-1][j] & wfetch[j]),
             .W_ready(),
             .W_in(W_data[i-1][j]),
@@ -146,7 +146,7 @@ module systolic (
         );
 
       //for control signals flowing rightward
-      if (i == sys_rows - 1 && i == 0 && j == 0)
+      if (i != sys_rows - 1 && i != 0 && j == 0)
         mac mac_instance (
             .clk(clk),
             .rst(rst),
@@ -164,7 +164,7 @@ module systolic (
             .P_out(P_data[i][j])
         );
 
-      else if (i == sys_rows - 1 && i == 0 && j == sys_cols - 1) begin
+      else if (i != sys_rows - 1 && i != 0 && j == sys_cols - 1)
         mac mac_instance (
             .clk(clk),
             .rst(rst),
@@ -181,7 +181,7 @@ module systolic (
             .P_in(P_data[i-1][j]),
             .P_out(P_data[i][j])
         );
-      end else if (i == sys_rows - 1 && i == 0)
+      else if (i != sys_rows - 1 && i != 0 && j != 0 && j != sys_cols - 1)
         mac mac_instance (
             .clk(clk),
             .rst(rst),
