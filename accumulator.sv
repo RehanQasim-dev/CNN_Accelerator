@@ -8,7 +8,7 @@ module accumulator (
     enable,
     [sys_cols-1:0][P_BITWIDTH-1:0] i_data,
     output logic [sys_cols-1:0] read_out,
-    output logic [sys_cols-1:0][W_BITWIDTH-1:0] o_data,
+    output logic [sys_cols-1:0][P_BITWIDTH-1:0] o_data,
     output logic done
 );
   // localparam string filenames[3] = {"file1.txt", "file2.txt", "file3.txt"};

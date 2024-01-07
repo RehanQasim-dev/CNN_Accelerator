@@ -21,16 +21,16 @@ module buffer #(
   reg [$clog2(DEPTH)-1:0] rptr;
   reg [DWIDTH-1 : 0] fifo[DEPTH];
 
-  initial begin
-    // $readmemh(filename, fifo);
-    fifo = '{default: '0};
-    $readmemh(filename, fifo);
-    wptr <= DUMP_LEN;
-    rptr <= 0;
-  end
+  // initial begin
+  //   fifo = '{default: '0};
+  //   $readmemh(filename, fifo);
+  //   wptr <= DUMP_LEN;
+  //   rptr <= 0;
+  // end
+
   always @(posedge wr_clk) begin
     if (rstn) begin
-      wptr <= DUMP_LEN;
+      wptr <= '0;
     end else begin
       if (wr_en & !full) begin
         fifo[wptr] <= din;

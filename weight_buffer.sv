@@ -3,7 +3,9 @@ import Config::*;
 module weight_buffer (
     input logic rst,
     clk,
-    read,
+    input logic read,
+    input logic [sys_cols-1:0] wr_en,
+    input logic [sys_cols-1:0][W_BITWIDTH-1:0] i_data,
     output logic [sys_cols-1:0] o_valid,
     output logic [sys_cols-1:0][W_BITWIDTH-1:0] o_data
 );
@@ -30,9 +32,9 @@ module weight_buffer (
       .rstn(rst),
       .wr_clk(clk),
       .rd_clk(clk),
-      .wr_en(),
+      .wr_en(wr_en[0]),
       .rd_en(read),
-      .din(),
+      .din(i_data[0]),
       .dout(o_data[0]),
       .empty(),
       .full()
@@ -49,9 +51,9 @@ module weight_buffer (
           .rstn(rst),
           .wr_clk(clk),
           .rd_clk(clk),
-          .wr_en(),
+          .wr_en(wr_en[i]),
           .rd_en(o_valid[i]),
-          .din(),
+          .din(i_data[i]),
           .dout(o_data[i]),
           .empty(),
           .full()

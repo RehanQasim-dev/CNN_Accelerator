@@ -1,5 +1,6 @@
 `include "w_controller.sv"
 `include "if_controller.sv"
+`include "instr_dec.sv"
 module controller (
     input clk,
     input rst,
@@ -7,6 +8,8 @@ module controller (
     w_done,
     if_done,
     rd_nxt_inst,
+    input logic instr_valid,
+    input logic [INSTR_SIZE-1:0] instr,
     output logic w_read,
 
     if_read,
@@ -111,12 +114,13 @@ module controller (
     if (rst) cs <= 0;
     else cs <= ns;
   end
+
   instr_dec instr_dec_instance (
       .clk(clk),
       .rst(rst),
-      .wr_en(),
+      .wr_en(instr_valid),
       .rd_nxt_inst(rd_nxt_inst),
-      .instr(),
+      .instr(instr),
       .start(first),
       .last(last)
   );

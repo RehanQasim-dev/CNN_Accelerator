@@ -20,13 +20,6 @@ module systolic (
   logic [sys_rows-2:0][sys_cols-1:0][P_BITWIDTH-1:0] P_data;
 
 
-  //   always_ff @(posedge clk) begin
-  //     W_switch[0][0] <= switch;
-  //     for (int i = 0; i < sys_rows - 1; i = i + 1) begin
-  //       W_switch[i+1][0] <= W_switch[i][0];
-  //     end
-  //   end
-  //   assign W_switch[0][0] = switch;
   always_ff @(posedge clk) begin
     W_switch[1][0] <= switch;
     for (int i = 1; i < sys_rows - 1; i = i + 1) begin
