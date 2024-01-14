@@ -1,9 +1,0 @@
-# vsim -voptargs="+acc" -c tb_top -do "run -all; exit" 
-# Start time: 17:47:27 on Dec 16,2023
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Error: controller.sv(114): Module 'instr_dec' is not defined.
-# ** Error: datapath.sv(65): Module 'accumulator' is not defined.
-# Optimization failed
-# Error loading design
-# End time: 17:47:28 on Dec 16,2023, Elapsed time: 0:00:01
-# Errors: 2, Warnings: 0
