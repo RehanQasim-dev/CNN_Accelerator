@@ -1,0 +1,3 @@
+[submodule "RISCV_Core"]
+	path = RISCV_Core
+	url = https://github.com/RehanQasim-dev/RISC-V-Three-Stage-Pipelined-Processor.git

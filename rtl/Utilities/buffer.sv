@@ -16,7 +16,6 @@ module buffer #(
     output empty,  //
     full  //
 );
-  // localparam col_len = 3;
   reg [$clog2(DEPTH)-1:0] wptr;
   reg [$clog2(DEPTH)-1:0] rptr;
   reg [DWIDTH-1 : 0] fifo[DEPTH];

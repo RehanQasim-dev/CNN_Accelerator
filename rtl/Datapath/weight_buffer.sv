@@ -24,10 +24,10 @@ module weight_buffer (
   end
 
   buffer #(
-      .filename("w1.txt"),
+      .filename(),
       .DEPTH(w_buffer_depth),
       .DWIDTH(W_BITWIDTH),
-      .DUMP_LEN(super_w_rows)
+      .DUMP_LEN()
   ) buffer_instance (
       .rstn(rst),
       .wr_clk(clk),
@@ -43,10 +43,10 @@ module weight_buffer (
   generate
     for (i = 1; i < sys_cols; i = i + 1) begin : FIFO
       buffer #(
-          .filename($sformatf("w%0d.txt", i + 1)),
+          .filename(),
           .DEPTH(w_buffer_depth),
           .DWIDTH(W_BITWIDTH),
-          .DUMP_LEN(super_w_rows)
+          .DUMP_LEN(0)
       ) buffer_instance (
           .rstn(rst),
           .wr_clk(clk),

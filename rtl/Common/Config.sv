@@ -7,10 +7,7 @@ package Config;
   parameter int sys_rows = 50;
   parameter int sys_cols = 50;
   //
-  parameter int super_A_rows = 12;
-  parameter int super_B_rows = 12;
-  parameter int super_w_rows = 8;
-  parameter int super_w_cols = 8;
+
   //matrix A config
   parameter int A_rows = 50;
   parameter int A_cols = sys_rows;
@@ -25,6 +22,12 @@ package Config;
   parameter int input_buffer_depth = A_rows;
   parameter int Accumulator_depth = A_rows;
   //
+  //These are original matrix sizes that we want to multiply and have to tile in case of bigger size,
+  //not being used anywhere yet
+  parameter int super_A_rows = 12;
+  parameter int super_B_rows = 12;
+  parameter int super_w_rows = 8;
+  parameter int super_w_cols = 8;
   parameter int counter_width = get_counter_width();
   parameter int no_of_tiles = (super_w_rows / sys_rows) * (super_w_cols / sys_cols);
   parameter int weight_dump_length = no_of_tiles * sys_rows;
